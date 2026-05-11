@@ -1,73 +1,86 @@
 <?php
+
 session_start();
 include "db.php";
 
-$error = "";
+$msg = "";
 
 if(isset($_POST['login'])){
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+$email = $_POST['email'];
+$haslo = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE email='$email'";
-    $result = mysqli_query($conn, $sql);
+$sql = "SELECT * FROM users WHERE email='$email'";
 
-    if(mysqli_num_rows($result) > 0){
+$wynik = mysqli_query($conn,$sql);
 
-        $row = mysqli_fetch_assoc($result);
+if(mysqli_num_rows($wynik) > 0){
 
-        if(password_verify($password, $row['password'])){
+$dane = mysqli_fetch_assoc($wynik);
 
-            $_SESSION['user'] = $row['name'];
+if(password_verify($haslo,$dane['password'])){
 
-            header("Location: dashboard.php");
-        }else{
-            $error = "zle haslo";
-        }
+$_SESSION['user'] = $dane['name'];
 
-    }else{
-        $error = "uzytkownik nie istnieje";
-    }
+header("Location: dashboard.php");
+
 }
+else{
+$msg = "zle haslo";
+}
+
+}
+else{
+$msg = "konto nie istnieje";
+}
+
+}
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Logowanie</title>
-    <link rel="stylesheet" href="style.css">
+
+<title>logowanie</title>
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1>sklep logowanie</h1>
-    <p>podaj login i haslo</p>
+<h1>sklep logowanie</h1>
 
-    <form method="POST">
+<p>podaj email i haslo</p>
 
-        <label>email</label>
-        <input type="email" name="email" required>
+<form method="POST">
 
-        <label>haslo</label>
-        <input type="password" name="password" required>
+<label>email</label>
+<input type="email" name="email" required>
 
-        <button type="submit" name="login">Login</button>
+<label>haslo</label>
+<input type="password" name="password" required>
 
-    </form>
+<button type="submit" name="login">
+zaloguj
+</button>
 
-    <div class="bottom-text">
-        <a href="forgot.php">zapomniales hasla?</a>
-    </div>
+</form>
 
-    <div class="bottom-text">
-        Nie masz konta?
-        <a href="register.php">Zarejestruj się</a>
-    </div>
+<div class="bottom-text">
+<a href="forgot.php">zapomniales hasla?</a>
+</div>
 
-    <div class="error">
-        <?php echo $error; ?>
-    </div>
+<div class="bottom-text">
+nie masz konta?
+<a href="register.php">rejestracja</a>
+</div>
+
+<p class="error">
+<?php echo $msg; ?>
+</p>
 
 </div>
 

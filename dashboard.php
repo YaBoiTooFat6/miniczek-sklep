@@ -1,30 +1,30 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['user'])){
+    if(isset($_SESSION['user']) == false){  
     header("Location: index.php");
 }
+
 ?>
 
 <!DOCTYPE html>
-<html>
-<head>
-    <title>dashboard</title>
+    <html>
+    <head>
+        <title>dashboard</title>
     <link rel="stylesheet" href="style.css">
-</head>
+    </head>
+
 <body>
 
 <div class="container">
 
-    <h1>witamy w sklepie</h1>
+<h1>Witamy w sklepie</h1>
 
-    <p>
-        witaj <?php echo $_SESSION['user']; ?>
-    </p>
+<p>Witaj <?php echo $_SESSION['user']; ?></p>
 
-    <a href="logout.php">
-        <button>wyloguj sie</button>
-    </a>
+<a href="logout.php">
+<button>Wyloguj sie</button>
+</a>
 
 </div>
 

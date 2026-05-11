@@ -5,28 +5,23 @@ $message = "";
 
 if(isset($_POST['register'])){
 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
+   $name = $_POST['name'];
+  $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $check = "SELECT * FROM users WHERE email='$email'";
+   $check = "SELECT * FROM users WHERE email='$email'";
     $result = mysqli_query($conn, $check);
+ if(mysqli_num_rows($result) > 0){
 
-    if(mysqli_num_rows($result) > 0){
-
-        $message = "Email already exists";
-
+ 
     }else{
-
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-
-        $sql = "INSERT INTO users(name,email,password)
-                VALUES('$name','$email','$hash')";
-
-        if(mysqli_query($conn, $sql)){
-            $message = "Account created";
-        }else{
-            $message = "Error";
+       $hash = password_hash($password, PASSWORD_DEFAULT);
+      $sql = "INSERT INTO users(name,email,password)
+    VALUES('$name','$email','$hash')";
+      if(mysqli_query($conn, $sql)){
+          $message = "Konto utworzone";
+      }else{
+        $message = "blad";
         }
     }
 }
@@ -42,21 +37,18 @@ if(isset($_POST['register'])){
 
 <div class="container">
 
-    <h1>rejestracja konta w sklepie</h1>
+<h1>rejestracja konta w sklepie</h1>
     <p>utworz swoje konto</p>
-
     <form method="POST">
+    <label>nazzwa</label>
+    <input type="text" name="name" required>
+<label>email</label>
+     <input type="email" name="email" required>
 
-        <label>nazzwa</label>
-        <input type="text" name="name" required>
+<label>haslo</label>
+ <input type="password" name="password" required>
 
-        <label>email</label>
-        <input type="email" name="email" required>
-
-        <label>haslo</label>
-        <input type="password" name="password" required>
-
-        <button type="submit" name="register">zarejestruj</button>
+ <button type="submit" name="register">zarejestruj</button>
 
     </form>
 

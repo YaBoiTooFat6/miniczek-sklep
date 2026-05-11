@@ -2,7 +2,6 @@ body{
     background: white;
     font-family: sans-serif;
 }
-
 .container{
     width: 250px;
     background: white;
@@ -11,36 +10,24 @@ body{
     margin-top: 100px;
     border: 1px solid black;
 }
-
 h1{
-    font-size: 20px;
-}
-
+    font-size: 20px;}
 input{
     width: 100%;
     margin-top: 5px;
-    margin-bottom: 10px;
-}
-
+    margin-bottom: 10px;}
 button{
     width: 100%;
     background: gray;
     color: black;
-    border: 1px solid black;
-}
-
+    border: 1px solid black;}
 a{
     color: blue;
 }
-
 .bottom-text{
     margin-top: 10px;
 }
-
 .error{
-    color: red;
-}
-
+    color: red;}
 .success{
-    color: green;
-}
+    color: green;}

@@ -2,13 +2,13 @@
 
 $host = "localhost";
 $user = "root";
-$pass = "";
-$db = "login_system";
+$password = "";
+$database = "login_system";
 
-$conn = mysqli_connect($host, $user, $pass, $db);
+$conn = mysqli_connect($host,$user,$password,$database);
 
-if (!$conn) {
-    die("Connection failed");
+if($conn == false){
+    die("blad polaczenia");
 }
 
 ?>
